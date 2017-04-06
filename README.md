@@ -1,8 +1,8 @@
 # RawRails
 
-## How to use the repository
+![](http://i.imgur.com/lUoRnnY.png)
 
-![rails-docker](http://imgur.com/a/U9UCs)
+## How to use the repository
 
 - First install [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/)
 - Create an environment variable to set local of your work dir with the APP_PATH_PROJECT key
