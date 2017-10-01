@@ -1,25 +1,25 @@
 version: '2'
 services:
-  app:
+  web:
     build: .
-    command: bash -c "
-      cd web &&
-      rm tmp/* -Rf &&
-      rails new . &&
-      rails s -p 3000 -b '0.0.0.0'"
+    command: bash start.sh
     environment:
       RAILS_ENV: development
     volumes:
-      - $APP_PATH_PROJECT:/app/web
+      - .:/app
     ports:
-      - "3111:3000"
+      - "3000:3000"
     depends_on:
       - database
     links:
       - database:docker_mysql
+  
   database:
-    image: mysql:5.7
+    image: mysql
     ports:
-      - "3371:3306"
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 123qwe
+      MYSQL_ROOT_PASSWORD: s0m3p455
+      MYSQL_DATABASE: app_development
+      MYSQL_USER: root
+      MYSQL_PASSWORD: s0m3p455
