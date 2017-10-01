@@ -1,23 +1,17 @@
-FROM ruby:2.3
-MAINTAINER jamessomqueiroz@gmail.com
+FROM ruby:2.4-alpine
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+ENV APP_DIR=/app
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends apt-utils build-essential curl libcurl4-openssl-dev libffi-dev libmysqlclient-dev libmysqld-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libxml2-dev libxslt1-dev libyaml-dev mysql-client nodejs python-software-properties sqlite3 zlib1g-dev
+ENV DEV_PACKAGES="build-base bash wget curl-dev ruby-dev zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev mysql-dev mysql-client" \
+    RAILS_PACKAGES="nodejs"
 
-# ===== Choose the rails version
-RUN gem install rails -v 5.0.1
-# RUN gem install rails -v 4.2.7.1
-# RUN gem install rails -v 4.1.16
-# RUN gem install rails -v 4.0.13
-# RUN gem install rails -v 3.2.22.5
+RUN apk --update --upgrade add $RAILS_PACKAGES $DEV_PACKAGES  
 
-RUN npm install bower -g
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
 
-RUN mkdir /app/web -p
-RUN mkdir /app/shared/tmp -p
+# Cache bundle install
+COPY Gemfile ./
 
-WORKDIR /app/
-ADD . /app/web
-
-RUN cd web
+COPY . $APP_DIR
+RUN bundle install
