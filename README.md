@@ -4,8 +4,6 @@
 <img src="http://i.imgur.com/lUoRnnY.png">
 </p>
 
-![](http://i.imgur.com/lUoRnnY.png)
-
 ## How to use the repository
 
 - After you clone the project
