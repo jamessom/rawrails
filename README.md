@@ -1,9 +1,14 @@
 # RawRails
 
+<p align="center"> 
+<img src="http://i.imgur.com/lUoRnnY.png">
+</p>
+
 ![](http://i.imgur.com/lUoRnnY.png)
 
 ## How to use the repository
 
+- After you clone the project
 - First install [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/)
 - Run this command to generate Rails files ```docker run -it --rm --user "$(id -u):$(id -g)" -v "$PWD":/usr/src/app -w /usr/src/app rails rails new -d=mysql --skip-bundle .```
    > you can change the version of rails by passing the tag referring to the version ex: ```rails:latest``` or ```rails:4.2.3``` [see more](https://hub.docker.com/r/library/rails/tags/)
