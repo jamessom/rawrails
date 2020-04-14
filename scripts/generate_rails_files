@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cp sample.env .env
+
+docker-compose run --rm app sh -c "gem install rails; rails new --database=postgresql --skip-bundle -T $APP_NAME"

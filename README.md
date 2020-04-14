@@ -1,21 +1,21 @@
 # RawRails
 
 <p align="center"> 
-<img src="http://i.imgur.com/lUoRnnY.png">
+   <img src="http://i.imgur.com/lUoRnnY.png">
 </p>
 
 ## How to use the repository
 
-- After you clone the project
-- First install [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/)
-- Run this command to generate Rails files ```docker run -it --rm --user "$(id -u):$(id -g)" -v "$PWD":/usr/src/app -w /usr/src/app rails rails new -d=mysql --skip-bundle .```
-   > you can change the version of rails by passing the tag referring to the version ex: ```rails:latest``` or ```rails:4.2.3``` [see more](https://hub.docker.com/r/library/rails/tags/)
+After you clone/fork this project if not installed [docker](https://docs.docker.com/engine/installation/) and [docker-composer](https://docs.docker.com/compose/install/), install them ;)
 
-   > You can change the database system, but you need to make the necessary changes
+Go to the work dir and run ```docker-compose build```
 
-   > do not forget to change the database settings to either work correctly
-   
-- Go to the work dir and run ```docker-compose up --build```
+Run command bellow to generate Rails files
+
+```shell
+export APP_NAME=choose_an_app_name; sh scripts/generate_rails_files
+```
+
 
 
 
