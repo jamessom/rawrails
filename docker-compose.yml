@@ -1,25 +1,30 @@
-version: '2'
+version: "3"
+
 services:
-  web:
-    build: .
-    command: bash start.sh
-    environment:
-      RAILS_ENV: development
-    volumes:
-      - .:/app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - database
-    links:
-      - database:docker_mysql
-  
   database:
-    image: mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: s0m3p455
-      MYSQL_DATABASE: app_development
-      MYSQL_USER: root
-      MYSQL_PASSWORD: s0m3p455
+    container_name: database
+    image: postgres:12-alpine
+    ports: [ "5432:5432" ]
+    networks: [ raw_net ]
+    env_file: [ ".env" ]
+    logging:
+      driver: "none"
+
+  app:
+    image: app:latest
+    container_name: app
+    build: .
+    command: sh scripts/start
+    volumes: [ ".:/app", ".app_data/gems:/.app_data/gems" ]
+    ports: [ "3000:3000" ]
+    networks: [ raw_net ]
+    env_file: [ ".env" ]
+    links: [ database ]
+    depends_on: [ database ]
+
+volumes:
+  .app_data:
+
+networks:
+  raw_net:
+    driver: bridge
