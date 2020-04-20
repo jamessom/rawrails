@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ ! -x "$(command -v docker)" ] && echo "Install Docker"
+[ ! -x "$(command -v docker-compose)" ] && echo "Install docker-compose"
+
 cp sample.env .env
 
 docker-compose run --rm app sh -c "gem install rails; rails new --database=postgresql --skip-bundle -T $APP_NAME"
